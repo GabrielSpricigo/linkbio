@@ -8,7 +8,9 @@
   let stars = [];
   const STAR_COUNT = 70; // 40–80 é o sweet spot
 
-  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  let prefersReduced = motionQuery?.matches ?? false;
+  let rafId = null;
 
   function resize() {
     w = Math.floor(window.innerWidth);
@@ -35,7 +37,7 @@
     }));
   }
 
-  function draw(t) {
+  function draw(t = 0) {
     // fundo transparente; o gradiente fica no CSS
     ctx.clearRect(0, 0, w, h);
 
@@ -67,12 +69,27 @@
       }
     }
 
-    if (!prefersReduced) requestAnimationFrame(draw);
+    if (!prefersReduced) rafId = requestAnimationFrame(draw);
   }
 
   resize();
   makeStars();
-  if (!prefersReduced) requestAnimationFrame(draw);
+  if (prefersReduced) {
+    draw(0);
+  } else {
+    rafId = requestAnimationFrame(draw);
+  }
+
+  motionQuery?.addEventListener?.("change", (event) => {
+    prefersReduced = event.matches;
+    if (prefersReduced) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+      draw(0);
+    } else {
+      if (!rafId) rafId = requestAnimationFrame(draw);
+    }
+  });
 
   window.addEventListener("resize", () => {
     resize();
