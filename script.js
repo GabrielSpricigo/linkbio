@@ -11,6 +11,9 @@
   const motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   let prefersReduced = motionQuery?.matches ?? false;
   let rafId = null;
+  let motionEnabled = !prefersReduced;
+  let userOverride = false;
+  const motionButton = document.getElementById("motion-toggle");
 
   function resize() {
     w = Math.floor(window.innerWidth);
@@ -51,7 +54,7 @@
       if (s.y > h + 10) s.y = -10;
 
       // twinkle (brilho alternando)
-      const twinkle = prefersReduced ? 1 : (0.65 + 0.35 * Math.sin(s.ph + t * s.tw));
+      const twinkle = motionEnabled ? (0.65 + 0.35 * Math.sin(s.ph + t * s.tw)) : 1;
       const alpha = Math.min(1, Math.max(0, s.a * twinkle));
 
       // estrela: pontinho + glow leve
@@ -69,27 +72,46 @@
       }
     }
 
-    if (!prefersReduced) rafId = requestAnimationFrame(draw);
+    if (motionEnabled) rafId = requestAnimationFrame(draw);
+  }
+
+  function setMotionState(nextEnabled, fromUser = false) {
+    motionEnabled = nextEnabled;
+    if (fromUser) userOverride = true;
+    if (motionButton) {
+      motionButton.textContent = motionEnabled ? "Desativar Movimento" : "Ativar Movimento";
+      motionButton.setAttribute("aria-pressed", motionEnabled ? "true" : "false");
+    }
+
+    if (motionEnabled) {
+      if (!rafId) rafId = requestAnimationFrame(draw);
+    } else {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+      draw(0);
+    }
   }
 
   resize();
   makeStars();
-  if (prefersReduced) {
-    draw(0);
-  } else {
+  if (motionEnabled) {
     rafId = requestAnimationFrame(draw);
+  } else {
+    draw(0);
   }
 
   motionQuery?.addEventListener?.("change", (event) => {
     prefersReduced = event.matches;
-    if (prefersReduced) {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = null;
-      draw(0);
-    } else {
-      if (!rafId) rafId = requestAnimationFrame(draw);
+    if (!userOverride) {
+      setMotionState(!prefersReduced);
     }
   });
+
+  motionButton?.addEventListener("click", () => {
+    setMotionState(!motionEnabled, true);
+  });
+
+  setMotionState(motionEnabled);
 
   window.addEventListener("resize", () => {
     resize();
