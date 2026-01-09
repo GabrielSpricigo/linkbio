@@ -89,19 +89,26 @@
       transform: translateZ(0);
     }
     .avatar{
-      width: 86px;
-      height: 86px;
-      border-radius: 999px;
-      margin: 0 auto 12px;
-      border: 1px solid var(--border);
-      background:
-        url ("./assets/IMG_9917.jpg") center / cover no-repeat,
-        radial-gradient(circle at 30% 30%, rgba(37,99,235,.25), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(14,165,233,.20), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,1), rgba(241,245,249,1));
-      box-shadow: 0 16px 28px rgba(2,6,23,.10);
-      position: relative;
-      overflow: hidden;
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+  margin: 0 auto 12px;
+  border: 1px solid var(--border);
+
+  background:
+    /* FOTO */
+    url("./assets/IMG_9917.jpg") center / cover no-repeat,
+
+    /* EFEITOS EXISTENTES */
+    radial-gradient(circle at 30% 30%, rgba(37,99,235,.25), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(14,165,233,.20), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,1), rgba(241,245,249,1));
+
+  box-shadow: 0 16px 28px rgba(2,6,23,.10);
+  position: relative;
+  overflow: hidden;
+}
+
     }
     .avatar::after{
       content:"";
