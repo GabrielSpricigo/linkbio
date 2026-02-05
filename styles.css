@@ -145,6 +145,10 @@ main {
   flex-shrink: 0;
 }
 
+.whatsapp-icon {
+  color: #ffffff;
+}
+
 .icon svg {
   width: 100%;
   height: 100%;
