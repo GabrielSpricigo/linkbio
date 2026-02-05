@@ -131,6 +131,25 @@ main {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  color: #25d366;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .btn.primary {
   border-color: rgba(124, 198, 255, 0.6);
   box-shadow: 0 16px 40px rgba(30, 120, 200, 0.25);
