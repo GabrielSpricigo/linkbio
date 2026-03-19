@@ -120,6 +120,7 @@ main {
 .card-claude {
   border-radius: 20px;
   padding: 2px;
+  overflow: hidden;
   background: radial-gradient(circle 80px at 80% -10%, #ffb347, #1c0900);
   position: relative;
   box-shadow:
@@ -164,7 +165,6 @@ main {
     rgba(255, 80, 0, 0.5),
     transparent
   );
-  box-shadow: -10px 10px 30px rgba(255, 78, 0, 0.2);
   pointer-events: none;
   z-index: 1;
 }
