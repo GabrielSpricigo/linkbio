@@ -157,7 +157,7 @@ main {
   gap: 16px;
   padding: 16px 18px;
   /* Fundo escuro com clarinho cinza no canto superior-direito (como a ref) */
-  background: radial-gradient(circle 90px at 88% -25%, #484848, #111111);
+  background: radial-gradient(circle 80px at 88% -30%, #222222, #111111);
   position: relative;
   overflow: hidden;
 }
