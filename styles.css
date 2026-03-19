@@ -268,6 +268,12 @@ main {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .card-claude::before {
+    animation: none;
+  }
+}
+
 @media (max-width: 420px) {
   .wrap {
     padding: 36px 16px 44px;
