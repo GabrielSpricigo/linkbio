@@ -119,76 +119,21 @@ main {
 
 /* ── Botão 1: Claude Course ── */
 
-/* Wrapper externo: cria a borda gradiente laranja */
 .card-claude {
   border-radius: 20px;
   padding: 2px;
-  overflow: hidden;
   background: linear-gradient(145deg, #ffb347 0%, #ff6b00 28%, #220800 62%, #080808 100%);
   box-shadow: 0 8px 32px rgba(255, 100, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-claude:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 42px rgba(255, 100, 0, 0.3);
-}
-
-.card-claude:active {
-  transform: scale(0.97);
-}
-
-/* O <a> preenche 100% do card sem padding/bg próprios */
+/* Remove a borda do .btn — a borda vem do card-claude */
 .btn-claude {
-  display: block;        /* sobrescreve o flex do .btn */
-  padding: 0;            /* sobrescreve o padding do .btn */
-  background: none;      /* sobrescreve o background do .btn */
-  border: none;          /* sobrescreve o border do .btn */
+  border: none;
   border-radius: 18px;
-  overflow: hidden;
-  box-shadow: none;
-}
-
-/* Área interna escura com efeitos contidos por overflow:hidden acima */
-.btn-claude__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 18px;
-  /* Fundo escuro com clarinho cinza no canto superior-direito (como a ref) */
-  background: var(--card);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Glow laranja no canto inferior-esquerdo via pseudo-elemento (100% contido) */
-.btn-claude__inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 120px 100px at -10% 130%,
-    rgba(255, 110, 20, 0.5),
-    rgba(255, 60, 0, 0.2) 45%,
-    transparent 70%
-  );
-  pointer-events: none;
 }
 
 .btn-claude .chev {
-  position: relative;
   color: #ffb347;
-  transition: color 0.3s ease;
-}
-
-.card-claude:hover .chev {
-  color: #ffe3c2;
-}
-
-.btn-claude .title,
-.btn-claude .label {
-  position: relative;
 }
 
 .btn {
